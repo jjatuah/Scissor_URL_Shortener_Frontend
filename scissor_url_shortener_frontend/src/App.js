@@ -1,9 +1,10 @@
 import './App.css';
+import Register from './pages/register/Register';
 
 function App() {
   return (
     <div className="App">
-      <h1>Thiago Alcantara</h1>
+      <Register />
     </div>
   );
 }

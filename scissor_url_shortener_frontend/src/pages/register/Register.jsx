@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Register.css";
-import FormInput from "../../components/form_input/FormInpur";
+import FormInput from "../../components/form_input/FormInput";
 
 const Register = () => {
 
@@ -9,12 +9,12 @@ const Register = () => {
     password:"",
     confirmpassword:""
   });
-
+  //pattern: `^(?=.*[0-9])(?=.*[a-zA-Z](?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`
   const inputs = [
     {
       id:1,
       name:"email",
-      type:"text",
+      type:"email",
       placeholder:"Email",
       label:"Email",
       errorMessage:"Please enter a valid email address",
@@ -23,11 +23,11 @@ const Register = () => {
     {
       id:2,
       name:"password",
-      type:"password",
+      type:"text",
       placeholder:"password",
       label:"password",
       errorMessage:"Password must be at least 8 characters long and should include a number",
-      pattern: "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$",
+      pattern: "^(?=.*\\d).{8,}$",
       required: true
     },
     {

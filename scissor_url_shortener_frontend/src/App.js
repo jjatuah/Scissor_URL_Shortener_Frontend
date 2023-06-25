@@ -2,6 +2,8 @@ import './App.css';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';
+import MyLinks from './pages/myLinks/MyLinks';
+import Nav from './components/nav/Nav';
 
 
 function App() {
@@ -9,7 +11,8 @@ function App() {
     <div className="App">
       {/* <Register />
       <Login /> */}
-      <Home />
+      {/* <Home /> */}
+      <MyLinks />
     </div>
   );
 }

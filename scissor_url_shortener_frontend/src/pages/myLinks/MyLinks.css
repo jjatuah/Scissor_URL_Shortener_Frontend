@@ -1,0 +1,35 @@
+.myLinks {
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.3)
+  ), url("../../assets/bg3.jpg");
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.linksInfo {
+  background: #fff;
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+table, th, td {
+  /* border: 2px solid brown; */
+  border-bottom: 2px solid brown;
+  border-collapse: collapse;
+  font-style: italic;
+}
+
+td, th {
+  text-align: center;
+  padding: 10px;
+}
+
+th {
+  background-color: brown;
+  border-radius: 10px 10px 0 0;
+  color: #fff;
+}

@@ -7,3 +7,29 @@
   background-size: cover;
   background-position: center;
 }
+
+.inputs {
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.inputs > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs > form > p {
+  font-style: italic;
+}
+
+.outputs {
+  display: flex;
+  margin: auto;
+  background-color: #fff;
+  width: 45%;
+  margin-top: 30px;
+  padding: 25px;
+  flex-direction: column;
+  border-radius: 20px;
+}

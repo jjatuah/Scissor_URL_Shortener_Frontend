@@ -23,7 +23,7 @@ const Register = () => {
     {
       id:2,
       name:"password",
-      type:"text",
+      type:"password",
       placeholder:"password",
       label:"password",
       errorMessage:"Password must be at least 8 characters long and should include a number",
@@ -37,6 +37,7 @@ const Register = () => {
       placeholder:"confirm password",
       label:"confirm password",
       errorMessage:"Passwords don't match",
+      pattern: values.password,
       required: true
     }  
   ]

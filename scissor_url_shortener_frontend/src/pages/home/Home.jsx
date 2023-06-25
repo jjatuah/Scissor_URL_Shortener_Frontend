@@ -19,6 +19,7 @@ const Home = () => {
       </div>
 
       <div className="outputs">
+        <pre>Here is your short URL below:</pre>
         <p>{text}</p>
         <button  onClick={() => {
           navigator.clipboard.writeText(text);}}>Click to copy short URL</button>

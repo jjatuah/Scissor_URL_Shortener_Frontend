@@ -9,7 +9,7 @@ const Register = () => {
     password:"",
     confirmpassword:""
   });
-  //pattern: `^(?=.*[0-9])(?=.*[a-zA-Z](?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`
+  
   const inputs = [
     {
       id:1,
@@ -56,7 +56,7 @@ const Register = () => {
     <div className="register">
       <div className="top">
         <h1>SCISSOR</h1>
-        <h2>Sign In</h2>
+        <a href="#">Sign In</a>
       </div>
       <form onSubmit={handleSubmit}>
         <h2>Signup to Scissor</h2>

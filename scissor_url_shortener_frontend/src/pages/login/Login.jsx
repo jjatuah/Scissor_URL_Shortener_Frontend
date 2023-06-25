@@ -5,10 +5,9 @@ const Login = () => {
 
   const [values, setValues] = useState({
     email:"",
-    password:"",
-    confirmpassword:""
+    password:""
   });
-  //pattern: `^(?=.*[0-9])(?=.*[a-zA-Z](?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`
+  
   const inputs = [
     {
       id:1,
@@ -28,17 +27,7 @@ const Login = () => {
       errorMessage:"Password must be at least 8 characters long and should include a number",
       pattern: "^(?=.*\\d).{8,}$",
       required: true
-    },
-    {
-      id:3,
-      name:"confirmPassword",
-      type:"password",
-      placeholder:"confirm password",
-      label:"confirm password",
-      errorMessage:"Passwords don't match",
-      pattern: values.password,
-      required: true
-    }  
+    } 
   ]
 
   const handleSubmit = (e) => {
@@ -55,15 +44,15 @@ const Login = () => {
     <div className="register">
       <div className="top">
         <h1>SCISSOR</h1>
-        <h2>Sign In</h2>
+        <a href="">Register</a>
       </div>
       <form onSubmit={handleSubmit}>
-        <h2>Signup to Scissor</h2>
+        <h2>Sign in to Scissor</h2>
         <p>We'll cut that URL short</p>
         {inputs.map((input) => (
           <FormInput key={input.id} {...input} value = {values[input.name]} onChange={onChange}/>
         ))}
-        <button>Register</button>
+        <button>Sign in</button>
       </form>
     </div>
    );

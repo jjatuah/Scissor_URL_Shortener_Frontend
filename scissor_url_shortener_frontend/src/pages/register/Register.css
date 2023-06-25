@@ -25,14 +25,24 @@
   color: brown;
   padding: 13px;
   border-radius: 10px;
+  font-size: 25px;
 }
 
-.top > h2 {
+.top > a {
   margin-right: 80px;
   background: #fff;
   color: brown;
   padding: 13px;
-  border-radius: 10px;
+  border-radius: 10px;  
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.top > a:hover {
+  color: #fff;
+  background: brown;
+  transition: .75s;
 }
 
 form {
@@ -57,4 +67,11 @@ form > button {
   cursor: pointer;
   font-weight: bold;
   margin: 15px 0;
+}
+
+form > button:hover {
+  color: brown;
+  background-color: #fff;
+  border: 1px solid brown;
+  transition: .75s;
 }

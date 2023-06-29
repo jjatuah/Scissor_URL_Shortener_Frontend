@@ -13,8 +13,8 @@ function App() {
       {/* <Register />
       <Login /> */}
       {/* <Home /> */}
-      {/* <MyLinks /> */}
-      <QR />
+      <MyLinks />
+      {/* <QR /> */}
     </div>
   );
 }

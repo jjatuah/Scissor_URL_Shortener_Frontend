@@ -1,6 +1,7 @@
-import "./Nav.css"
+import "./Nav.css";
+import { Link } from "react-router-dom";
 
-
+//<Link className="link" to="/"><span>Homepage</span></Link>
 const Nav = () => {
   return ( 
     <div className="nav">
@@ -8,10 +9,10 @@ const Nav = () => {
         <h1>SCISSOR</h1>
       </div>
 
-      <div className="navLinks">
-        <a href="#">Create Link</a>
-        <a href="#">QR Code</a>
-        <a href="#">My Links</a>
+      <div className="navLinks">        
+        <Link to="/links">My Links</Link>
+        <Link to="/qr">QR Code</Link>
+        <Link to="/">Create Link</Link>
       </div>
     </div>
    );

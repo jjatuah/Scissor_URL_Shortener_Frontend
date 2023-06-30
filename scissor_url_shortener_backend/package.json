@@ -1,0 +1,35 @@
+{
+  "name": "scissor_url_shortener",
+  "version": "1.0.0",
+  "description": "URL Shortening Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjatuah/Scissor_URL_Shortener.git"
+  },
+  "author": "Joseph Jatuah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjatuah/Scissor_URL_Shortener/issues"
+  },
+  "homepage": "https://github.com/jjatuah/Scissor_URL_Shortener#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.0",
+    "qrcode": "^1.5.3",
+    "redis": "^3.1.2",
+    "request-ip": "^3.3.0",
+    "shortid": "^2.2.16",
+    "valid-url": "^1.0.9"
+  }
+}

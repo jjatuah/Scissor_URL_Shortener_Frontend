@@ -1,7 +1,7 @@
 import "./Home.css";
 import Nav from "../../components/nav/Nav";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 const Home = () => {
@@ -10,22 +10,57 @@ const Home = () => {
 
   const [inputData, setIputData] = useState(baseData)
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+
   const handleData = (e) => {
     setIputData({...inputData, [e.target.name]:e.target.value})
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Make the Axios POST request here
+    axios.post('http://localhost:5000/', inputData)
+      .then(response => {
+        // Handle the response data
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle the error
+        console.error(error);
+        console.log(error);
+      });
+
+    setIsSubmitted(true);
+  };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      // This effect will run when the form is submitted
+      // You can perform any additional actions here
+      console.log('Form submitted:', inputData);
+
+      // Reset the form data and submission flag
+      setIputData({longUrl: "", urlCode: ""});
+      setIsSubmitted(false);
+    }
+  }, [isSubmitted]);
+
+
   const text = "Short URL that will be generated"
+
   return ( 
     <div className="home">
       <Nav />
       <div className="inputs">
-        <form>
+        <form onSubmit={handleSubmit}>
           <p>Let's help you cut that URL short</p>
           <label>Long URL</label>
           <input value={inputData.longUrl} name="longUrl" type="url" placeholder="Enter Long URL" onChange={handleData} required/>
           <label>Shortcode For Customization</label>
           <input type="text" value={inputData.urlCode} name="urlCode" placeholder="Enter Your own shortcode if you feel like" onChange={handleData}/>
-          <button>Shorten</button>
+          <button type="submit">Shorten</button>
         </form>
       </div>
 

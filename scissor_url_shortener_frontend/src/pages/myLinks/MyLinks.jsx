@@ -31,7 +31,7 @@ const MyLinks = () => {
       // Remove the deleted item from the state
       setLinks(links.filter((link) => link._id !== id));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 

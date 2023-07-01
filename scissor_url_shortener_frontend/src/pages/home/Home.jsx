@@ -12,6 +12,8 @@ const Home = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [textContent, setTextContent] = useState("Short URL that will be generated")
+  
 
   const handleData = (e) => {
     setIputData({...inputData, [e.target.name]:e.target.value})
@@ -24,7 +26,9 @@ const Home = () => {
     axios.post('http://localhost:5000/', inputData)
       .then(response => {
         // Handle the response data
+        setTextContent(true)
         console.log(response.data);
+        setTextContent(`${response.data.shortUrl}`)
       })
       .catch(error => {
         // Handle the error
@@ -48,8 +52,6 @@ const Home = () => {
   }, [isSubmitted]);
 
 
-  const text = "Short URL that will be generated"
-
   return ( 
     <div className="home">
       <Nav />
@@ -66,9 +68,9 @@ const Home = () => {
 
       <div className="outputs">
         <pre>Here is your short URL below:</pre>
-        <p>{text}</p>
+        <p>{textContent}</p>
         <button  onClick={() => {
-          navigator.clipboard.writeText(text);}}>Click to copy short URL</button>
+          navigator.clipboard.writeText(textContent);}}>Click to copy short URL</button>
       </div>
     </div>
    );

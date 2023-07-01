@@ -22,6 +22,19 @@ const MyLinks = () => {
     }
     getData()
   }, [])
+
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      await axios.delete(`http://localhost:5000/${id}`);
+      console.log('Item deleted successfully!');
+      // Remove the deleted item from the state
+      setLinks(links.filter((link) => link._id !== id));
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+
   return ( 
     <div className="myLinks">
       <Nav />
@@ -40,12 +53,12 @@ const MyLinks = () => {
             <tbody>
               {
                 links.map((link) => (
-                  <tr>
+                  <tr key={link._id}>
                     <td>{link.longUrl}</td>
                     <td>{link.shortUrl}</td>
                     <td>{link.clicks}</td>
                     <td>{link.ipAddress}</td>
-                    <td><a href="#">Delete</a></td>
+                    <td><p onClick={() => handleDelete(link._id)} >Delete</p></td>
                   </tr>
                 ))
               }

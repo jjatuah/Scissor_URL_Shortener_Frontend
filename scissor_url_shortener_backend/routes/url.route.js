@@ -51,37 +51,30 @@ urlRoute.get('/', async (req, res) => {
 
 
 urlRoute.get('/:urlCode', async (req, res) => {
-  try {
-    redisClient.get(req.params.urlCode, async (error, urlInfo) => {
-      if (error) {
-        console.error(error);
-      }
-      
-      if (urlInfo != null) {
-        console.log("cache Hit");
-        return res.json(JSON.parse(urlInfo));
-      } else {
-        console.log('cache miss');
-        const urlData = await urlModel.findOne({ urlCode: req.params.urlCode });
-        const ipAddress = await requestIP.getClientIp(req);
+    const urlData = await urlModel.findOne({ urlCode: req.params.urlCode });
+    const ipAddress = await requestIP.getClientIp(req);
+    console.log(ipAddress);
 
-        if (urlData) {
-          urlData.clicks++;
-          if (!urlData.ipAddress.includes(ipAddress)) {
-            urlData.ipAddress.push(ipAddress);
-          }
-          urlData.save();
-          redisClient.setex(req.params.urlCode, DEFAULT_EXPIRATION, JSON.stringify(urlData));
-          res.status(200).json(urlData);
-        } else {
-          return res.status(404).json("No URL found");
+    if (urlData) {
+      urlData.clicks++;
+      if (!urlData.ipAddress.includes(ipAddress)) {
+          urlData.ipAddress.push(ipAddress);
         }
-      }
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json("No URL found");
-  }
+        urlData.save();
+        
+        // Invalidate the cache for the URL list
+        redisClient.del("/", (error, result) => {
+          if (error) {
+            console.error(error);
+          }
+          console.log("Invalidated cache for URL list");
+        });
+        
+        res.status(200).json(urlData);
+    } else {
+      return res.status(404).json("No URL found");
+    }
+
 });
 
 

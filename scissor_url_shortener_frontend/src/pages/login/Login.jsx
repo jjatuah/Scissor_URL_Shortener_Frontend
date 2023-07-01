@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormInput from "../../components/form_input/FormInput";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 
@@ -39,12 +40,12 @@ const Login = () => {
   }
 
   console.log(values);
-
+  
   return ( 
     <div className="register">
       <div className="top">
         <h1>SCISSOR</h1>
-        <a href="">Register</a>
+        <Link to="/register">Register</Link>
       </div>
       <form onSubmit={handleSubmit}>
         <h2>Sign in to Scissor</h2>

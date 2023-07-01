@@ -1,8 +1,27 @@
 import "./MyLinks.css";
 import Nav from "../../components/nav/Nav";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+
 
 
 const MyLinks = () => {
+
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/`)
+        console.log(response.data);
+        setLinks(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData()
+  }, [])
   return ( 
     <div className="myLinks">
       <Nav />
@@ -19,37 +38,18 @@ const MyLinks = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>https://www.hotnigerianjobs.com/field/236/web-developer-jobs-in-nigeria</td>
-                <td>bit.ly/dhfldyvff</td>
-                <td>5</td>
-                <td>192.652.658.214,198.235.32.22,192.369.257.12,158.258.321.55,192.673.787.32</td>
-                <td><a href="#">Delete</a></td>
-              </tr>
-
-              <tr>
-                <td>https://www.hotnigerianjobs.com/field/236/web-developer-jobs-in-nigeria</td>
-                <td>bit.ly/dhfldyvff</td>
-                <td>5</td>
-                <td>192.652.658.214,198.235.32.22,192.369.257.12,158.258.321,55</td>
-                <td><a href="#">Delete</a></td>
-              </tr>
-
-              <tr>
-                <td>https://www.hotnigerianjobs.com/field/236/web-developer-jobs-in-nigeria</td>
-                <td>bit.ly/dhfldyvff</td>
-                <td>5</td>
-                <td>192.652.658.214,198.235.32.22,192.369.257.12,158.258.321,55</td>
-                <td><a href="#">Delete</a></td>
-              </tr>
-
-              <tr>
-                <td>https://www.hotnigerianjobs.com/field/236/web-developer-jobs-in-nigeria</td>
-                <td>bit.ly/dhfldyvff</td>
-                <td>5</td>
-                <td>192.652.658.214,198.235.32.22,192.369.257.12,158.258.321,55</td>
-                <td><a href="#">Delete</a></td>
-              </tr>
+              {
+                links.map((link) => (
+                  <tr>
+                    <td>{link.longUrl}</td>
+                    <td>{link.shortUrl}</td>
+                    <td>{link.clicks}</td>
+                    <td>{link.ipAddress}</td>
+                    <td><a href="#">Delete</a></td>
+                  </tr>
+                ))
+              }
+              
             </tbody>
           </table>
         </div>

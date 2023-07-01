@@ -1,7 +1,18 @@
 import "./Home.css";
 import Nav from "../../components/nav/Nav";
+import axios from "axios";
+import { useState } from "react";
+
 
 const Home = () => {
+
+  const baseData = {longUrl: "", urlCode: ""}
+
+  const [inputData, setIputData] = useState(baseData)
+
+  const handleData = (e) => {
+    setIputData({...inputData, [e.target.name]:e.target.value})
+  }
 
   const text = "Short URL that will be generated"
   return ( 
@@ -11,9 +22,9 @@ const Home = () => {
         <form>
           <p>Let's help you cut that URL short</p>
           <label>Long URL</label>
-          <input type="url" placeholder="Enter Long URL" required/>
+          <input value={inputData.longUrl} name="longUrl" type="url" placeholder="Enter Long URL" onChange={handleData} required/>
           <label>Shortcode For Customization</label>
-          <input type="text" placeholder="Enter Your own shortcode if you feel like"/>
+          <input type="text" value={inputData.urlCode} name="urlCode" placeholder="Enter Your own shortcode if you feel like" onChange={handleData}/>
           <button>Shorten</button>
         </form>
       </div>

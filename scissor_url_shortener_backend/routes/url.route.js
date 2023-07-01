@@ -141,7 +141,14 @@ urlRoute.post('/', async (req, res) => {
             qrCode,
             date: new Date()
           });
-
+          
+          // Invalidate the cache for the URL list
+          redisClient.del("/", (error, result) => {
+            if (error) {
+              console.error(error);
+            }
+            console.log("Invalidated cache for URL list");
+          });
 
           res.json(url)
         }

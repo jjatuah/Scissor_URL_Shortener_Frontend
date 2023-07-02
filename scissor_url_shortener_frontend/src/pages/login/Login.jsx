@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormInput from "../../components/form_input/FormInput";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
 
@@ -12,7 +13,7 @@ const Login = () => {
   const inputs = [
     {
       id:1,
-      name:"email",
+      name:"email", 
       type:"email",
       placeholder:"Email",
       label:"Email",
@@ -31,8 +32,20 @@ const Login = () => {
     } 
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Make the Axios POST request here
+    await axios.post('http://localhost:5000/login', values)
+      .then(response => {
+        // Handle the response data
+        console.log(response);
+      })
+      .catch(error => {
+        // Handle the error
+        console.error(error);
+        console.log(error);
+      });
   };
 
   const onChange = (e) => {

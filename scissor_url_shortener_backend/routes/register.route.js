@@ -9,16 +9,15 @@ registerRoute.post("/", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const newUser = new userModel.create({
+    const newUser = await userModel.create({
       email : email,
       password : password
     })
 
-    console.log(newUser);
     res.status(200).send("Registered")
   } catch (error) {
-    res.status(400)
-    console.log(error).send(error);
+    res.status(400).send(error)
+    console.log(error);
   }
 })
 

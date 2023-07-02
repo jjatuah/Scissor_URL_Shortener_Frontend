@@ -19,11 +19,11 @@ const Home = () => {
     setIputData({...inputData, [e.target.name]:e.target.value})
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Make the Axios POST request here
-    axios.post('http://localhost:5000/', inputData)
+    await axios.post('http://localhost:5000/', inputData)
       .then(response => {
         // Handle the response data
         setTextContent(true)
@@ -44,6 +44,8 @@ const Home = () => {
       // This effect will run when the form is submitted
       // You can perform any additional actions here
       console.log('Form submitted:', inputData);
+
+      
 
       // Reset the form data and submission flag
       setIputData({longUrl: "", urlCode: ""});

@@ -2,13 +2,14 @@ import { useState } from "react";
 import "./Register.css";
 import FormInput from "../../components/form_input/FormInput";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
 
   const [values, setValues] = useState({
     email:"",
     password:"",
-    confirmpassword:""
+    confirmPassword:""
   });
   
   const inputs = [
@@ -43,15 +44,26 @@ const Register = () => {
     }  
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Make the Axios POST request here
+    await axios.post('http://localhost:5000/register', values)
+      .then(response => {
+        // Handle the response data
+        console.log(response);
+      })
+      .catch(error => {
+        // Handle the error
+        console.error(error);
+        console.log(error);
+      });
   };
 
   const onChange = (e) => {
     setValues({...values, [e.target.name]: e.target.value});
   }
 
-  console.log(values);
 
   return ( 
     <div className="register">
@@ -65,7 +77,7 @@ const Register = () => {
         {inputs.map((input) => (
           <FormInput key={input.id} {...input} value = {values[input.name]} onChange={onChange}/>
         ))}
-        <button>Register</button>
+        <button type="submit">Register</button>
       </form>
     </div>
    );

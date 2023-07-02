@@ -11,4 +11,4 @@ const tokenGenerator = async (id, email) => {
   }
 }
 
-module.exports = tokenGenerator; 
+module.exports = tokenGenerator;

@@ -1,8 +1,13 @@
 import "./Nav.css";
 import { Link } from "react-router-dom";
 
-//<Link className="link" to="/"><span>Homepage</span></Link>
+
 const Nav = () => {
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+  }
+
   return ( 
     <div className="nav">
       <div className="header">
@@ -13,6 +18,7 @@ const Nav = () => {
         <Link to="/links">My Links</Link>
         <Link to="/qr">QR Code</Link>
         <Link to="/">Create Link</Link>
+        <Link to="/login" onClick={handleLogout}>Log Out</Link>
       </div>
     </div>
    );

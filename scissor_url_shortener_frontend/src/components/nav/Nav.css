@@ -35,4 +35,5 @@
   color: #fff;
   background: brown;
   transition: .75s;
+  cursor: pointer;
 }

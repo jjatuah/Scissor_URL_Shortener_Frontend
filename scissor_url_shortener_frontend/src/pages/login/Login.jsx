@@ -55,6 +55,19 @@ const Login = () => {
     setValues({...values, [e.target.name]: e.target.value});
   }
 
+  useEffect(() => {
+    const clearToken = () => {
+      localStorage.removeItem("token");
+    };
+
+    // Set a timeout for 24 hours
+    const timeout = setTimeout(clearToken, 24 * 60 * 60 * 1000);
+
+    // Clean up the timeout when the component unmounts or when the token changes
+    return () => clearTimeout(timeout);
+  }, []);
+
+
   console.log(values);
   
   return ( 

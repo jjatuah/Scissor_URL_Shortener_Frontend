@@ -10,11 +10,16 @@ const MyLinks = () => {
 
   const [links, setLinks] = useState([]);
 
-  useEffect(() => {
-    
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {        
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/`)
+        const response = await axios.get(`http://localhost:5000/` , {
+          headers: {
+            Authorization: token
+          }
+        })
         console.log(response.data);
         setLinks(response.data)
       } catch (error) {
@@ -27,7 +32,11 @@ const MyLinks = () => {
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:5000/${id}`);
+      await axios.delete(`http://localhost:5000/${id}` , {
+        headers: {
+          Authorization: token
+        }
+      });
       console.log('Item deleted successfully!');
       // Remove the deleted item from the state
       setLinks(links.filter((link) => link._id !== id));

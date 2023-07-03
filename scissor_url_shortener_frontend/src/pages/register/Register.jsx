@@ -52,6 +52,10 @@ const Register = () => {
       .then(response => {
         // Handle the response data
         console.log(response);
+
+        const token = response.data.token;
+
+        localStorage.setItem('token', token);
       })
       .catch(error => {
         // Handle the error

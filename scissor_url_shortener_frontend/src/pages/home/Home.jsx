@@ -19,11 +19,18 @@ const Home = () => {
     setIputData({...inputData, [e.target.name]:e.target.value})
   }
 
+  //Get the token from the local storage
+  const token = localStorage.getItem('token');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Make the Axios POST request here
-    await axios.post('http://localhost:5000/', inputData)
+    await axios.post('http://localhost:5000/', inputData, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then(response => {
         // Handle the response data
         setTextContent(true)

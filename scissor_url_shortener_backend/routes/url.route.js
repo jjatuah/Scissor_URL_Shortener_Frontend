@@ -52,7 +52,7 @@ urlRoute.get('/', authMiddleware, async (req, res) => {
 
 
 
-urlRoute.get('/:urlCode', authMiddleware, async (req, res) => {
+urlRoute.get('/:urlCode', async (req, res) => {
     const urlData = await urlModel.findOne({ urlCode: req.params.urlCode });
     const ipAddress = await requestIP.getClientIp(req);
     console.log(ipAddress);

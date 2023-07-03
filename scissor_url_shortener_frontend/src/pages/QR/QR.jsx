@@ -12,10 +12,17 @@ const QR = () => {
 
   const [qrLinks, setQrLinks] = useState([]);
 
+  //Get the token from the local storage
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/`)
+        const response = await axios.get(`http://localhost:5000/`, {
+          headers: {
+            Authorization: token
+          }
+        })
         console.log(response.data);
         setQrLinks(response.data)
       } catch (error) {

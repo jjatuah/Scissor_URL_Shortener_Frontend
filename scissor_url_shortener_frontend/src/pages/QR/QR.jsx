@@ -12,8 +12,15 @@ const QR = () => {
 
   const [qrLinks, setQrLinks] = useState([]);
 
+  const [qrImage, setQrImage] = useState()
+
   //Get the token from the local storage
   const token = localStorage.getItem('token');
+
+  const handleClick = (check) => {
+    setButtonPopUp(true)
+    setQrImage(check)
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -40,14 +47,14 @@ const QR = () => {
 
         {
             qrLinks.map((qrlink) => (
-              <>
+              <div key={qrlink._id}> 
                 <div className="link">
                   <p>{qrlink.longUrl}</p>
-                  <p onClick={() => setButtonPopUp(true)}>Generate QR Code</p>
+                  <p onClick={() => handleClick(qrlink.qrCode)}>Generate QR Code</p>
                 </div>
 
-                <PopUp testImg={qrlink.qrCode} setTrigger={setButtonPopUp} trigger={buttonPopUp} />
-              </>
+                <PopUp testImg={qrImage} setTrigger={setButtonPopUp} trigger={buttonPopUp} />
+              </div>
             ))
           }
         

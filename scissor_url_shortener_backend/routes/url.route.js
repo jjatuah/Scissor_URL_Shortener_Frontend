@@ -5,6 +5,7 @@ const shortId = require("shortid")
 const requestIP = require('request-ip');
 var QRCode = require('qrcode')
 const redis = require('redis');
+const authMiddleware = require("../authMiddleware")
 require('dotenv').config();
 
 const urlRoute = express.Router();
@@ -27,7 +28,8 @@ redisClient.on('error', (error) => {
 // })
   
 
-urlRoute.get('/', async (req, res) => { 
+urlRoute.get('/', authMiddleware, async (req, res) => { 
+  console.log(req.user);
   try {
     redisClient.get("/", async (error, urlInfo) => { 
       if (error) {
@@ -50,7 +52,7 @@ urlRoute.get('/', async (req, res) => {
 
 
 
-urlRoute.get('/:urlCode', async (req, res) => {
+urlRoute.get('/:urlCode', authMiddleware, async (req, res) => {
     const urlData = await urlModel.findOne({ urlCode: req.params.urlCode });
     const ipAddress = await requestIP.getClientIp(req);
     console.log(ipAddress);
@@ -95,7 +97,7 @@ urlRoute.get('/:urlCode', async (req, res) => {
 
 
 
-urlRoute.post('/', async (req, res) => {
+urlRoute.post('/', authMiddleware, async (req, res) => {
 
   let { longUrl, urlCode } = req.body;
 
@@ -164,7 +166,7 @@ urlRoute.post('/', async (req, res) => {
  
 
 
-urlRoute.delete('/:id', async (req, res) => {
+urlRoute.delete('/:id', authMiddleware, async (req, res) => {
   const urlId = req.params.id;
 
   try {

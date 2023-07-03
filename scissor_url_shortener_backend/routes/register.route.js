@@ -17,12 +17,7 @@ registerRoute.post("/", async (req, res) => {
 
     const token = await tokenGenerator(newUser._id, newUser.email);
 
-    res.cookie("jwt", token, {
-      expires : new Date(Date.now() + 86400000),
-      httpOnly : true
-    })
-
-    res.status(201).send("Registered")
+    res.status(201).json({message: "Registered", token})
   } catch (error) {
     res.status(500).send(error)
     console.log(error);

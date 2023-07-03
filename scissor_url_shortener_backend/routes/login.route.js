@@ -21,12 +21,8 @@ loginRoute.post("/", async (req, res) => {
       if (isMatch) {
         //Generate token
         const token = await tokenGenerator(user._id, user.email);
-        res.cookie("jwt", token, {
-          expires : new Date(Date.now() + 86400000),
-          httpOnly : true
-        })
 
-        res.status(200).send("Logged in")
+        res.status(200).json({message: "Logged in", token})
       } else {
         res.status(400).send("Invalid Password")
       }

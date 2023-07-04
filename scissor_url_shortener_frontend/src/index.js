@@ -15,41 +15,41 @@ import Login from './pages/login/Login';
 
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <Home />,
+//   },
 
-  {
-    path: "/links",
-    element: <MyLinks />,
-  },
+//   {
+//     path: "/links",
+//     element: <MyLinks />,
+//   },
 
-  {
-    path: "/qr",
-    element: <QR />,
-  },
+//   {
+//     path: "/qr",
+//     element: <QR />,
+//   },
 
-  {
-    path: "/register",
-    element: <Register />,
-  },
+//   {
+//     path: "/register",
+//     element: <Register />,
+//   },
 
-  {
-    path: "/login",
-    element: <Login />,
-  },
+//   {
+//     path: "/login",
+//     element: <Login />,
+//   },
 
   
-]);
+// ]);
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 );
 

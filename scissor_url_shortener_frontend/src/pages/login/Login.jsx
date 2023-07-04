@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../../components/form_input/FormInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -43,6 +43,7 @@ const Login = () => {
         const token = response.data.token;
 
         localStorage.setItem('token', token);
+
       })
       .catch(error => {
         // Handle the error

@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import FormInput from "../../components/form_input/FormInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     email:"",
@@ -44,6 +47,7 @@ const Login = () => {
 
         localStorage.setItem('token', token);
 
+        navigate('/') 
       })
       .catch(error => {
         // Handle the error

@@ -3,8 +3,11 @@ import "./Register.css";
 import FormInput from "../../components/form_input/FormInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     email:"",
@@ -55,7 +58,9 @@ const Register = () => {
 
         const token = response.data.token;
 
-        localStorage.setItem('token', token);
+        console.log(token);
+
+        navigate('/')
       })
       .catch(error => {
         // Handle the error

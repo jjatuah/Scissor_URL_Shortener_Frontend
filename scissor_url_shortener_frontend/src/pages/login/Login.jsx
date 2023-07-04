@@ -12,6 +12,10 @@ const Login = () => {
     email:"",
     password:""
   });
+
+  const [error, setError] = useState(false)
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
   
   const inputs = [
     {
@@ -51,8 +55,20 @@ const Login = () => {
       })
       .catch(error => {
         // Handle the error
-        console.error(error);
-        console.log(error);
+        if (error.response.data == "Invalid Email") {
+          setError(true)
+          setEmailError(error.response.data)
+          setPasswordError("")
+        } 
+
+        if (error.response.data == "Invalid Password") {
+          setError(true)
+          setEmailError("")
+          setPasswordError(error.response.data)
+        } 
+        
+        console.error(error.response.data);
+        console.log(error.response.data);
       });
   };
 
@@ -81,6 +97,12 @@ const Login = () => {
         <h1>SCISSOR</h1>
         <Link to="/register">Register</Link>
       </div>
+
+      {error && <div className="error">
+        <p>{emailError}</p>
+        <p>{passwordError}</p>
+      </div>}
+      
       <form onSubmit={handleSubmit}>
         <h2>Sign in to Scissor</h2>
         <p>We'll cut that URL short</p>
@@ -89,6 +111,7 @@ const Login = () => {
         ))}
         <button>Sign in</button>
       </form>
+      
     </div>
    );
 }

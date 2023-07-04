@@ -75,3 +75,13 @@ form > button:hover {
   border: 1px solid brown;
   transition: .75s;
 }
+
+.error {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  color: Red;
+  font-weight: 500;
+  font-size: 16px;
+}

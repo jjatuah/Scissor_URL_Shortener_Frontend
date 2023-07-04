@@ -34,8 +34,7 @@ const Home = () => {
       .then(response => {
         // Handle the response data
         setTextContent(true)
-        console.log(response.data);
-        setTextContent(`${response.data.shortUrl}`)
+        setTextContent(`${response.data.shortUrl || response.data}`)
       })
       .catch(error => {
         // Handle the error
@@ -50,7 +49,7 @@ const Home = () => {
     if (isSubmitted) {
       // This effect will run when the form is submitted
       // You can perform any additional actions here
-      console.log('Form submitted:', inputData);
+      // console.log('Form submitted:', inputData);
 
       
 

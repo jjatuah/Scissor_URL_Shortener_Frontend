@@ -29,7 +29,7 @@ redisClient.on('error', (error) => {
   
 
 urlRoute.get('/', authMiddleware, async (req, res) => { 
-  console.log(req.user);
+  
   try {
     redisClient.get("/", async (error, urlInfo) => { 
       if (error) {
@@ -40,7 +40,7 @@ urlRoute.get('/', authMiddleware, async (req, res) => {
         return res.json(JSON.parse(urlInfo));
       } else {
         console.log('cache miss');    
-        const url = await urlModel.find().sort({ _id: -1 }).limit(20);
+        const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
         redisClient.setex("/", DEFAULT_EXPIRATION, JSON.stringify(url));
         res.status(200).json(url);
       }
@@ -98,6 +98,10 @@ urlRoute.get('/:urlCode', async (req, res) => {
 
 
 urlRoute.post('/', authMiddleware, async (req, res) => {
+  // let token = req.header('Authorization')
+  // const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+  // console.log(req.user);
 
   let { longUrl, urlCode } = req.body;
 
@@ -129,11 +133,14 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
 
           const qrCode = await QRCode.toDataURL(longUrl)
 
+          const creator = req.user
+
           url = await urlModel.create({
             longUrl,
             shortUrl,
             urlCode,
             qrCode,
+            creator,
             date: new Date()
           });
           
@@ -166,22 +173,56 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
  
 
 
+// urlRoute.delete('/:id', authMiddleware, async (req, res) => {
+//   const urlId = req.params.id;
+
+//   try {
+//     // Delete the URL from the database
+//     const deletedUrl = await urlModel.findByIdAndDelete(urlId);
+
+//     // If the URL was successfully deleted from the database
+//     if (deletedUrl) {
+//       // Delete the corresponding Redis data
+//       redisClient.del(`/${urlId}`, (error, result) => {
+//         if (error) {
+//           console.error(error);
+//         }
+//         console.log(`Deleted Redis data for URL with id: ${urlId}`);
+
+//         // Invalidate the cache for the deleted URL
+//         redisClient.del("/", (error, result) => {
+//           if (error) {
+//             console.error(error);
+//           }
+//           console.log("Invalidated cache for URL list");
+//         });
+//       });
+
+//       res.status(200).json("URL successfully deleted...");
+//     } else {
+//       res.status(404).json("No URL found");
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 urlRoute.delete('/:id', authMiddleware, async (req, res) => {
   const urlId = req.params.id;
-
   try {
     // Delete the URL from the database
-    const deletedUrl = await urlModel.findByIdAndDelete(urlId);
+    const url = await urlModel.findById(urlId);
+    
+    if (url.creator == req.user) {
+      await urlModel.findByIdAndDelete(urlId)
 
-    // If the URL was successfully deleted from the database
-    if (deletedUrl) {
       // Delete the corresponding Redis data
       redisClient.del(`/${urlId}`, (error, result) => {
         if (error) {
           console.error(error);
         }
         console.log(`Deleted Redis data for URL with id: ${urlId}`);
-
+      
         // Invalidate the cache for the deleted URL
         redisClient.del("/", (error, result) => {
           if (error) {
@@ -189,16 +230,17 @@ urlRoute.delete('/:id', authMiddleware, async (req, res) => {
           }
           console.log("Invalidated cache for URL list");
         });
-      });
-
+      }); 
+      
       res.status(200).json("URL successfully deleted...");
     } else {
-      res.status(404).json("No URL found");
+      res.status(404).json("You can only delete URL's you created");
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
   
 

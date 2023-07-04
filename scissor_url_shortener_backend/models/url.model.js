@@ -27,6 +27,10 @@ const UrlSchema = new mongoose.Schema({
     default: 0
   },
 
+  creator: {
+    type: String
+  },
+
   date: {
     type: String,
     default: Date.now

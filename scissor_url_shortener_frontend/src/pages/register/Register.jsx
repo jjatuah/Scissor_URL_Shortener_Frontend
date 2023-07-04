@@ -14,8 +14,11 @@ const Register = () => {
     password:"",
     confirmPassword:""
   });
+
+  const [mailError, setMailError] = useState(false)
+  const [mailText, setMailText] = useState("")
   
-  const inputs = [
+  const inputs = [ 
     {
       id:1,
       name:"email",
@@ -54,13 +57,17 @@ const Register = () => {
     await axios.post('http://localhost:5000/register', values)
       .then(response => {
         // Handle the response data
-        console.log(response);
+        console.log(response.data);
+        if (response.data == "User already exists. Proceed to login") {
+          setMailError(true)
+          setMailText(response.data)
+        } else {
+          const token = response.data.token;
 
-        const token = response.data.token;
+          localStorage.setItem('token', token);
 
-        console.log(token);
-
-        navigate('/')
+          navigate('/')
+        }
       })
       .catch(error => {
         // Handle the error
@@ -80,6 +87,11 @@ const Register = () => {
         <h1>SCISSOR</h1>
         <Link to="/login">Sign In</Link>
       </div>
+
+      {mailError && <div className="error">
+        <p>{mailText}</p>
+      </div>}
+
       <form onSubmit={handleSubmit}>
         <h2>Signup to Scissor</h2>
         <p>We'll cut that URL short</p>

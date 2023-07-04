@@ -10,14 +10,20 @@ registerRoute.post("/", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const newUser = await userModel.create({
-      email : email,
-      password : password
-    })
-
-    const token = await tokenGenerator(newUser._id, newUser.email);
-
-    res.status(201).json({message: "Registered", token})
+    let user = await userModel.findOne({ email })
+    if (user) {
+      res.send("User already exists. Proceed to login")
+    } else {
+      const newUser = await userModel.create({
+        email : email,
+        password : password
+      })
+  
+      const token = await tokenGenerator(newUser._id, newUser.email);
+  
+      res.status(201).json({message: "Registered", token})
+    }
+    
   } catch (error) {
     res.status(500).send(error)
     console.log(error);

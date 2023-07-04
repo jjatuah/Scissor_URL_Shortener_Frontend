@@ -107,6 +107,8 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
 
   const baseUrl = process.env.BASE_URL;
 
+  const creator = req.user
+
   //verify that base url is valid
   if(!validUrl.isUri(baseUrl)) {
     return res.status(401).json("Invalid base URL");
@@ -121,7 +123,9 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
   if(validUrl.isUri(longUrl)) {
     try {
       //check if long url is already in the database and return its details if its there already. Else create new short Uurl details for it
-      let url = await urlModel.findOne({ longUrl })
+
+      const conditions = {longUrl, creator }
+      let url = await urlModel.findOne( conditions).exec()
       if (url) {
         res.json(url)
       } else {
@@ -133,7 +137,7 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
 
           const qrCode = await QRCode.toDataURL(longUrl)
 
-          const creator = req.user
+          
 
           url = await urlModel.create({
             longUrl,

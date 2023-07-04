@@ -55,7 +55,7 @@ const MyLinks = () => {
               <tr>
                 <th>Long URL</th>
                 <th>Short URL</th>
-                <th>Clicks/Used</th>
+                <th>Clicks/Visted</th>
                 <th>Visitors IP</th>
               </tr>
             </thead>
@@ -68,6 +68,7 @@ const MyLinks = () => {
                     <td>{link.shortUrl}</td>
                     <td>{link.clicks}</td>
                     <td>{link.ipAddress}</td>
+                    <td><a href={link.shortUrl}>Visit site</a></td>
                     <td><p onClick={() => handleDelete(link._id)} >Delete</p></td>
                   </tr>
                 ))

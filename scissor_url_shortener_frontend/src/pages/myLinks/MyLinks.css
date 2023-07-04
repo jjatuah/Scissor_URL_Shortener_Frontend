@@ -49,3 +49,19 @@ td > p:hover {
   transition: .75s;
   cursor: pointer;
 }
+
+td > a {
+  background-color: brown;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+td > a:hover {
+  background-color: #fff;
+  color: brown;
+  border: 1px solid brown;
+  transition: .75s;
+  cursor: pointer;
+}

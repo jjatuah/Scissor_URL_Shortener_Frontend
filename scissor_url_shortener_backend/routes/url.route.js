@@ -31,7 +31,7 @@ redisClient.on('error', (error) => {
 urlRoute.get('/', authMiddleware, async (req, res) => { 
   
   try {
-    redisClient.get("/", async (error, urlInfo) => { 
+    redisClient.get(`/${req.user}`, async (error, urlInfo) => { 
       if (error) {
         console.error(error);
       }
@@ -41,7 +41,7 @@ urlRoute.get('/', authMiddleware, async (req, res) => {
       } else {
         console.log('cache miss');    
         const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
-        redisClient.setex("/", DEFAULT_EXPIRATION, JSON.stringify(url));
+        redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
         res.status(200).json(url);
       }
     });
@@ -65,7 +65,7 @@ urlRoute.get('/:urlCode', async (req, res) => {
         urlData.save();
         
         // Invalidate the cache for the URL list
-        redisClient.del("/", (error, result) => {
+        redisClient.del(`/${req.user}`, (error, result) => {
           if (error) {
             console.error(error);
           }
@@ -149,7 +149,7 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
           });
           
           // Invalidate the cache for the URL list
-          redisClient.del("/", (error, result) => {
+          redisClient.del(`/${req.user}`, (error, result) => {
             if (error) {
               console.error(error);
             }
@@ -228,7 +228,7 @@ urlRoute.delete('/:id', authMiddleware, async (req, res) => {
         console.log(`Deleted Redis data for URL with id: ${urlId}`);
       
         // Invalidate the cache for the deleted URL
-        redisClient.del("/", (error, result) => {
+        redisClient.del(`/${req.user}`, (error, result) => {
           if (error) {
             console.error(error);
           }

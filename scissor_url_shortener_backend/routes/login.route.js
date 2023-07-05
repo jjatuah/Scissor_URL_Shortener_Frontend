@@ -30,8 +30,8 @@ loginRoute.post("/", async (req, res) => {
       res.status(400).send("Invalid Email")
     }
   } catch (error) {
-    res.status(400)
-    console.log(error).send(error);
+    res.status(400).send("Unexpected error occurred");
+    console.log(error)
   }
 })
 

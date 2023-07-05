@@ -44,3 +44,7 @@ app.use("/register", registerRoute);
 app.listen(PORT, () => {
   console.log("App Listening on PORT:", PORT);
 })
+
+
+
+module.exports = app;

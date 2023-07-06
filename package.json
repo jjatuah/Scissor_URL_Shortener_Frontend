@@ -5,7 +5,7 @@
  
   "scripts": {
     "start": "node scissor_url_shortener_backend/index.js",
-    "build": "cd scissor_url_shortener_backend && cd ../scissor_url_shortener_frontend && npm install && npm run build",
+    "build": "cd scissor_url_shortener_backend && npm install && cd ../scissor_url_shortener_frontend && npm install && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

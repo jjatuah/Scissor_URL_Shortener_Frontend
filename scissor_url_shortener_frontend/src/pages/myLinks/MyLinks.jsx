@@ -20,10 +20,8 @@ const MyLinks = () => {
             Authorization: token
           }
         })
-        console.log(response.data);
         setLinks(response.data)
       } catch (error) {
-        console.log(error);
       }
     }
     getData()
@@ -41,7 +39,6 @@ const MyLinks = () => {
       // Remove the deleted item from the state
       setLinks(links.filter((link) => link._id !== id));
     } catch (error) {
-      console.log(error);
     }
   };
 

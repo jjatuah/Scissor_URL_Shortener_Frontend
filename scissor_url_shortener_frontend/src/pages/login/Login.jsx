@@ -67,8 +67,6 @@ const Login = () => {
           setPasswordError(error.response.data)
         } 
         
-        console.error(error.response.data);
-        console.log(error.response.data);
       });
   };
 
@@ -89,7 +87,6 @@ const Login = () => {
   }, []);
 
 
-  console.log(values);
   
   return ( 
     <div className="register">

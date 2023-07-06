@@ -30,10 +30,8 @@ const QR = () => {
             Authorization: token
           }
         })
-        console.log(response.data);
         setQrLinks(response.data)
       } catch (error) {
-        console.log(error);
       }
     }
     getData()

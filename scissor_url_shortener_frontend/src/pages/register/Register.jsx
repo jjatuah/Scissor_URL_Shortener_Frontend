@@ -56,8 +56,6 @@ const Register = () => {
     // Make the Axios POST request here
     await axios.post('http://localhost:5000/register', values)
       .then(response => {
-        // Handle the response data
-        console.log(response.data);
         if (response.data == "User already exists. Proceed to login") {
           setMailError(true)
           setMailText(response.data)
@@ -70,9 +68,7 @@ const Register = () => {
         }
       })
       .catch(error => {
-        // Handle the error
-        console.error(error);
-        console.log(error);
+        // Handle the error;
       });
   };
 

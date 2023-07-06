@@ -38,8 +38,6 @@ const Home = () => {
       })
       .catch(error => {
         // Handle the error
-        console.error(error);
-        console.log(error);
       });
 
     setIsSubmitted(true);

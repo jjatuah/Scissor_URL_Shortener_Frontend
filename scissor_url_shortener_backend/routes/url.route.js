@@ -22,10 +22,6 @@ redisClient.on('error', (error) => {
   console.error('Redis connection error:', error);
 });
 
-// urlRoute.get('/', async (req, res) => {
-//   const shortUrls = await urlModel.find()
-//   res.render('index', { shortUrls: shortUrls})
-// })
   
 
 urlRoute.get('/', authMiddleware, async (req, res) => { 
@@ -81,27 +77,10 @@ urlRoute.get('/:urlCode', async (req, res) => {
 
 
 
-// urlRoute.get('/:shortUrl', async (req, res) => {
-//   const shortUrl = await urlModel.findOne({short_url: req.params.shortUrl})
-
-//   if(shortUrl == null) {
-//     return res.status(404).json('Invalid URL')
-//   }
-
-//   shortUrl.clicks++
-
-//   shortUrl.save()
-
-//   res.redirect(shortUrl.full_url)
-// })
-
 
 
 urlRoute.post('/', authMiddleware, async (req, res) => {
-  // let token = req.header('Authorization')
-  // const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
-  // console.log(req.user);
+  
 
   let { longUrl, urlCode } = req.body;
 
@@ -168,48 +147,11 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
     res.status(401).json("invalid long url")
   }
 
-  // await urlModel.create({
-  //   full_url: req.body.fullUrl
-  // })
-
-  // res.redirect('/')
 })
  
 
 
-// urlRoute.delete('/:id', authMiddleware, async (req, res) => {
-//   const urlId = req.params.id;
 
-//   try {
-//     // Delete the URL from the database
-//     const deletedUrl = await urlModel.findByIdAndDelete(urlId);
-
-//     // If the URL was successfully deleted from the database
-//     if (deletedUrl) {
-//       // Delete the corresponding Redis data
-//       redisClient.del(`/${urlId}`, (error, result) => {
-//         if (error) {
-//           console.error(error);
-//         }
-//         console.log(`Deleted Redis data for URL with id: ${urlId}`);
-
-//         // Invalidate the cache for the deleted URL
-//         redisClient.del("/", (error, result) => {
-//           if (error) {
-//             console.error(error);
-//           }
-//           console.log("Invalidated cache for URL list");
-//         });
-//       });
-
-//       res.status(200).json("URL successfully deleted...");
-//     } else {
-//       res.status(404).json("No URL found");
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 urlRoute.delete('/:id', authMiddleware, async (req, res) => {
   const urlId = req.params.id;

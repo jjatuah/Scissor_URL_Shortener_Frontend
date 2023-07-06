@@ -2,3 +2,5 @@ node_modules
 
 
 scissor_url_shortener_backend/.env
+
+git rm --cached scissor_url_shortener_backend/.env

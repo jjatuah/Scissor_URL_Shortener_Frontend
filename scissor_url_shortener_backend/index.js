@@ -19,8 +19,6 @@ const corsOrigin ={
 }
 app.use(cors(corsOrigin));
 
-
-
  
 // connect to database
 Database.connect();
@@ -33,9 +31,14 @@ app.use(cookieParser())
 
 
 
-app.use("/", urlRoute);
+app.use("/url", urlRoute);
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Scissor. Register or Login To enjoy our services")
+})
 
 
 app.listen(PORT, () => {

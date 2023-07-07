@@ -20,8 +20,11 @@ const MyLinks = () => {
             Authorization: token
           }
         })
+
+        console.log(response);
         setLinks(response.data)
       } catch (error) {
+        console.log(error);
       }
     }
     getData()

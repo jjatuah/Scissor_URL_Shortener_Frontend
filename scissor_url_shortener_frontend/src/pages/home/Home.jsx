@@ -26,7 +26,7 @@ const Home = () => {
     event.preventDefault();
 
     // Make the Axios POST request here
-    await axios.post('http://localhost:5000/', inputData, {
+    await axios.post('https://scissor-url-shortener-mern-backend.onrender.com/', inputData, {
       headers: {
         Authorization: token
       }

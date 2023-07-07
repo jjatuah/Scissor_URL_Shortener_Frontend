@@ -25,7 +25,7 @@ const QR = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/`, {
+        const response = await axios.get(`https://scissor-url-shortener-mern-backend.onrender.com/`, {
           headers: {
             Authorization: token
           }

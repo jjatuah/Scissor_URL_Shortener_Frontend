@@ -25,7 +25,7 @@ redisClient.on('error', (error) => {
 
 urlRoute.get('/', authMiddleware, async (req, res) => {
   try {
-    let urlInfo = await getFromCache(`/${req.user}`);
+    let urlInfo = getFromCache(`/${req.user}`);
     if (urlInfo !== null) {
       console.log("Cache Hit");
       return res.json(JSON.parse(urlInfo));

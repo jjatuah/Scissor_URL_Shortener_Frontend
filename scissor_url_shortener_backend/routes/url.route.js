@@ -23,59 +23,59 @@ redisClient.on('error', (error) => {
 });
 
 
-urlRoute.get('/', authMiddleware, async (req, res) => {
-  try {
-    let urlInfo = await getFromCache(`/${req.user}`);
-    if (urlInfo !== null) {
-      console.log("Cache Hit");
-      return res.json(JSON.parse(urlInfo));
-    }
-
-    console.log('Cache Miss');
-    const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
-    redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
-
-    res.status(200).json(url);
-  } catch (err) {
-    res.status(500).json({ status: false, message: err });
-  }
-});
-
-async function getFromCache(key) {
-  return new Promise((resolve, reject) => {
-    redisClient.get(key, (error, data) => {
-      if (error) {
-        console.error(error);
-        reject(error);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
-
-
-// urlRoute.get('/', authMiddleware, async (req, res) => { 
-  
+// urlRoute.get('/', authMiddleware, async (req, res) => {
 //   try {
-//     redisClient.get(`/${req.user}`, async (error, urlInfo) => { 
-//       if (error) {
-//         console.error(error);
-//       }
-//       if (urlInfo != null) {  
-//         console.log("cache Hit");
-//         return res.json(JSON.parse(urlInfo));
-//       } else {
-//         console.log('cache miss');    
-//         const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
-//         redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
-//         res.status(200).json(url);
-//       }
-//     });
+//     let urlInfo = await getFromCache(`/${req.user}`);
+//     if (urlInfo !== null) {
+//       console.log("Cache Hit");
+//       return res.json(JSON.parse(urlInfo));
+//     }
+
+//     console.log('Cache Miss');
+//     const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
+//     redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
+
+//     res.status(200).json(url);
 //   } catch (err) {
 //     res.status(500).json({ status: false, message: err });
 //   }
 // });
+
+// async function getFromCache(key) {
+//   return new Promise((resolve, reject) => {
+//     redisClient.get(key, (error, data) => {
+//       if (error) {
+//         console.error(error);
+//         reject(error);
+//       } else {
+//         resolve(data);
+//       }
+//     });
+//   });
+// }
+
+
+urlRoute.get('/', authMiddleware, async (req, res) => { 
+  
+  try {
+    redisClient.get(`/${req.user}`, async (error, urlInfo) => { 
+      if (error) {
+        console.error(error);
+      }
+      if (urlInfo != null) {  
+        console.log("cache Hit");
+        return res.json(JSON.parse(urlInfo));
+      } else {
+        console.log('cache miss');    
+        const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
+        redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
+        res.status(200).json(url);
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ status: false, message: err });
+  }
+});
 
 
 

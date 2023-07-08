@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const urlRoute = express.Router();
 
-const redisClient = redis.createClient({ url: 'redis://red-cikmia15rnuvtgqfbem0:6379' });
+const redisClient = redis.createClient({ url: 'rediss://red-cikmia15rnuvtgqfbem0:Eh2rQSZlNp76bfK8TMeEcCPmXOR26ADX@oregon-redis.render.com:6379' });
 
 const DEFAULT_EXPIRATION = 3600;
 

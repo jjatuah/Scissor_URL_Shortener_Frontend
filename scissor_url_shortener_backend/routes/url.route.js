@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const urlRoute = express.Router();
 
-const redisClient = redis.createClient({ host: 'localhost', port: 6379 });
+const redisClient = redis.createClient({ url: 'redis://red-cikmia15rnuvtgqfbem0:6379' });
 
 const DEFAULT_EXPIRATION = 3600;
 
@@ -25,7 +25,7 @@ redisClient.on('error', (error) => {
 
 urlRoute.get('/', authMiddleware, async (req, res) => {
   try {
-    let urlInfo = getFromCache(`/${req.user}`);
+    let urlInfo = await getFromCache(`/${req.user}`);
     if (urlInfo !== null) {
       console.log("Cache Hit");
       return res.json(JSON.parse(urlInfo));

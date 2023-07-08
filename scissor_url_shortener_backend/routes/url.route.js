@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const urlRoute = express.Router();
 
-const redisClient = redis.createClient({ url: 'rediss://red-cikmia15rnuvtgqfbem0:Eh2rQSZlNp76bfK8TMeEcCPmXOR26ADX@oregon-redis.render.com:6379' });
+const redisClient = redis.createClient({ url: process.env.REDIS_URI });
 
 const DEFAULT_EXPIRATION = 3600;
 
@@ -23,37 +23,6 @@ redisClient.on('error', (error) => {
 });
 
 
-// urlRoute.get('/', authMiddleware, async (req, res) => {
-//   try {
-//     let urlInfo = await getFromCache(`/${req.user}`);
-//     if (urlInfo !== null) {
-//       console.log("Cache Hit");
-//       return res.json(JSON.parse(urlInfo));
-//     }
-
-//     console.log('Cache Miss');
-//     const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
-//     redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
-
-//     res.status(200).json(url);
-//   } catch (err) {
-//     res.status(500).json({ status: false, message: err });
-//   }
-// });
-
-// async function getFromCache(key) {
-//   return new Promise((resolve, reject) => {
-//     redisClient.get(key, (error, data) => {
-//       if (error) {
-//         console.error(error);
-//         reject(error);
-//       } else {
-//         resolve(data);
-//       }
-//     });
-//   });
-// }
-
 
 urlRoute.get('/', authMiddleware, async (req, res) => { 
   
@@ -63,10 +32,8 @@ urlRoute.get('/', authMiddleware, async (req, res) => {
         console.error(error);
       }
       if (urlInfo != null) {  
-        console.log("cache Hit");
         return res.json(JSON.parse(urlInfo));
-      } else {
-        console.log('cache miss');    
+      } else {    
         const url = await urlModel.find({ creator: req.user }).sort({ _id: -1 }).limit(20);
         redisClient.setex(`/${req.user}`, DEFAULT_EXPIRATION, JSON.stringify(url));
         res.status(200).json(url);
@@ -82,7 +49,6 @@ urlRoute.get('/', authMiddleware, async (req, res) => {
 urlRoute.get('/:urlCode', async (req, res) => {
     const urlData = await urlModel.findOne({ urlCode: req.params.urlCode });
     const ipAddress = await requestIP.getClientIp(req);
-    console.log(ipAddress);
 
     if (urlData) {
       urlData.clicks++;
@@ -179,8 +145,6 @@ urlRoute.post('/', authMiddleware, async (req, res) => {
 
 })
  
-
-
 
 
 urlRoute.delete('/:id', authMiddleware, async (req, res) => {

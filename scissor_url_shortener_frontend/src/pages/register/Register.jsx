@@ -54,7 +54,7 @@ const Register = () => {
     e.preventDefault();
 
     // Make the Axios POST request here
-    await axios.post('https://scissor-url-shortener-mern-backend.onrender.com/register', values)
+    await axios.post('https://short-3u0c.onrender.com/register', values)
       .then(response => {
         if (response.data == "User already exists. Proceed to login") {
           setMailError(true)

@@ -15,7 +15,7 @@ const MyLinks = () => {
   useEffect(() => {        
     const getData = async () => {
       try {
-        const response = await axios.get(`https://scissor-url-shortener-mern-backend.onrender.com/` , {
+        const response = await axios.get(`https://short-3u0c.onrender.com/url` , {
           headers: {
             Authorization: token
           }
@@ -33,7 +33,7 @@ const MyLinks = () => {
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`http://localhost:5000/${id}` , {
+      await axios.delete(`https://short-3u0c.onrender.com/url/${id}` , {
         headers: {
           Authorization: token
         }
@@ -45,7 +45,7 @@ const MyLinks = () => {
     }
   };
 
-  return ( 
+  return (  
     <div className="myLinks">
       <Nav />
       <div className="linksInfo">

@@ -49,7 +49,7 @@ describe('authMiddleware', () => {
 
     // Verify that res.status and res.json were called with the correct arguments
     expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.json).toHaveBeenCalledWith({ message: 'You are Unauthorized. Login or Register' });
+    expect(res.json).toHaveBeenCalledWith({ message: 'You are Unauthorized. Login or Register to enjoy our Services' });
 
     // Verify that next was not called
     expect(next).not.toHaveBeenCalled();

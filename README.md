@@ -1,2 +1,2 @@
-# Scissor_URL_Shortener_Frontend
-The Frontend of my URL Shortening Application using React
+# Scissor_URL_Shortener_MERN
+The detailed documentation of thr API is given below

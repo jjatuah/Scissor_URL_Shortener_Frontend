@@ -20,11 +20,8 @@ const MyLinks = () => {
             Authorization: token
           }
         })
-
-        console.log(response);
         setLinks(response.data)
       } catch (error) {
-        console.log(error);
       }
     }
     getData()
@@ -38,7 +35,6 @@ const MyLinks = () => {
           Authorization: token
         }
       });
-      console.log('Item deleted successfully!');
       // Remove the deleted item from the state
       setLinks(links.filter((link) => link._id !== id));
     } catch (error) {
@@ -68,7 +64,7 @@ const MyLinks = () => {
                     <td>{link.shortUrl}</td>
                     <td>{link.clicks}</td>
                     <td>{link.ipAddress}</td>
-                    <td><a href={link.shortUrl}>Visit site</a></td>
+                    <td><a href={link.shortUrl}>Visit</a></td>
                     <td><p onClick={() => handleDelete(link._id)} >Delete</p></td>
                   </tr>
                 ))

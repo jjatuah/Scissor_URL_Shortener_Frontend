@@ -12,7 +12,7 @@ const urlRoute = express.Router();
 
 const redisClient = redis.createClient({ url: process.env.REDIS_URI });
 
-const DEFAULT_EXPIRATION = 3600;
+const DEFAULT_EXPIRATION = 60;
 
 redisClient.on('connect', () => {
   console.log('Connected to Redis');
@@ -70,8 +70,6 @@ urlRoute.get('/:urlCode', async (req, res) => {
     }
 
 });
-
-
 
 
 

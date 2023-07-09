@@ -25,7 +25,7 @@ const MyLinks = () => {
       }
     }
     getData()
-  }, [])
+  }, [links])
 
   const handleDelete = async (id) => {
     try {

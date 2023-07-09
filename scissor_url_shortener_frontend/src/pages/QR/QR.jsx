@@ -35,7 +35,7 @@ const QR = () => {
       }
     }
     getData()
-  }, [])
+  }, [qrLinks])
 
   return ( 
     <div className="qr">

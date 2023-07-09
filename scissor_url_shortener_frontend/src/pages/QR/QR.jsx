@@ -25,7 +25,7 @@ const QR = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`https://short-3u0c.onrender.com/url`, {
+        const response = await axios.get(`https://short-3u0c.onrender.com/`, {
           headers: {
             Authorization: token
           }

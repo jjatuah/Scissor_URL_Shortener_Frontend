@@ -31,14 +31,9 @@ app.use(cookieParser())
 
 
 
-app.use("/url", urlRoute);
+app.use("/", urlRoute);
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
-
-
-app.get("/", (req, res) => {
-  res.send("Welcome to Scissor. Register or Login To enjoy our services")
-})
 
 
 app.listen(PORT, () => {

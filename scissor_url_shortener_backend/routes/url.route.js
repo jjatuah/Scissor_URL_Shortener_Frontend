@@ -62,7 +62,6 @@ urlRoute.get('/:urlCode', async (req, res) => {
           if (error) {
             console.error(error);
           }
-          console.log("Invalidated cache for URL list");
         });
         
         res.redirect(urlData.longUrl);

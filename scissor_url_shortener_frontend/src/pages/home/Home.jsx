@@ -26,7 +26,7 @@ const Home = () => {
     event.preventDefault();
 
     // Make the Axios POST request here
-    await axios.post('https://short-3u0c.onrender.com/url', inputData, {
+    await axios.post('https://short-3u0c.onrender.com/', inputData, {
       headers: {
         Authorization: token
       }

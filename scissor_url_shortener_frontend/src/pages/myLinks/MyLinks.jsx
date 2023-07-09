@@ -33,7 +33,7 @@ const MyLinks = () => {
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`https://short-3u0c.onrender.com/url/${id}` , {
+      await axios.delete(`https://short-3u0c.onrender.com/${id}` , {
         headers: {
           Authorization: token
         }

@@ -5,7 +5,7 @@ const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization');
 
   if (!token) {
-    return res.status(401).json({ message: 'You are Unauthorized. Login or Register' });
+    return res.status(401).json({ message: 'You are Unauthorized. Login or Register to enjoy our Services' });
   }
 
   try {

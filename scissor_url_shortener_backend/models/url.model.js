@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UrlSchema = new mongoose.Schema({
   longUrl: {
     type: String,
-    required: true 
+    required: true,
   },
 
   shortUrl: {
